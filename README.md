@@ -8,7 +8,6 @@ A user-friendly online platform where customers can browse and purchase various 
 - **User-Friendly Interface**: Clean, modern, and easy-to-navigate design for an enjoyable shopping experience.
 - **Product Ordering**: Users can place orders for their desired plants and products.
 - **Feedback System**: Users can rate and leave feedback on the products they’ve purchased, helping others make informed decisions.
-- **Responsive Design**: Optimized for both desktop and mobile users.
 
 ## Installation
 
