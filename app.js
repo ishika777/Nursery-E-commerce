@@ -25,9 +25,9 @@ const reviewRouter = require("./routes/review.js");
 const wishlistRouter = require("./routes/wishlist.js");
 const cartRouter = require("./routes/cart.js");
 const orderRouter = require("./routes/order.js");
-const chatbotRouter = require("./routes/chatbot.js");
 
 const MONGO_URL = "mongodb://127.0.0.1/plant_nursery";
+// const dbUrl = process.env.ATLASDB_URL;
 
 main()
     .then(() => {
@@ -69,8 +69,8 @@ app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
-passport.use(new LocalStrategy(Admin.authenticate()));
+passport.use("user-local", new LocalStrategy(User.authenticate()));
+passport.use("admin-local", new LocalStrategy(Admin.authenticate()));
 
 passport.serializeUser((entity, done) => {
     const userType = entity instanceof User ? 'user' : 'admin';
@@ -81,10 +81,10 @@ passport.deserializeUser(async (obj, done) => {
     try {
         if (obj.type === 'user') {
             const user = await User.findById(obj.id);
-            done(null, user);
+            return done(null, user || false);
         } else if (obj.type === 'admin') {
             const admin = await Admin.findById(obj.id);
-            done(null, admin);
+            return done(null, admin || false);
         }
     } 
     catch (error) {
@@ -92,7 +92,10 @@ passport.deserializeUser(async (obj, done) => {
     }
 });
 
-app.use((req, res, next) => {
+app.use(async(req, res, next) => {
+    // if (req.session.user) {
+    //     req.user = await User.findById(req.session.user._id); 
+    // }
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
     if (req.user) {
@@ -120,7 +123,10 @@ app.use("/home/:id/reviews", reviewRouter);
 app.use("/wishlist", wishlistRouter);
 app.use("/cart", cartRouter);
 app.use("/order", orderRouter);
-app.use("/chatbot", chatbotRouter);
+
+app.all("*", (req, res, next) => {
+    next(new ExpressError(404, "Page Not Found!"));
+})
 
 app.use((err, req, res, next) => {
     let{statusCode = 500, message = "Something went wrong!"} = err;

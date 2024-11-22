@@ -146,15 +146,13 @@ router.post("/", upload.single("product[image]"), wrapAsync(async(req, res, next
 // Router for show
 router.get("/:id", wrapAsync(async (req, res) => {
     let {id} = req.params;
-    const product = await Product.findById(id).populate(
-        {
-            path: 'reviews',
-            populate: {
-                path: 'author',
-                model: 'User'
-                // path: 'user'
-            }
-        });
+    const product = await Product.findById(id).populate({
+        path: 'reviews',
+        populate: {
+          path: 'author',
+          model: 'User'   
+        }
+      })
     if(!product){
         req.flash("error", "Product you requested for does not exist!");
         res.redirect("/home");
@@ -165,7 +163,7 @@ router.get("/:id", wrapAsync(async (req, res) => {
 // Router for edit
 router.get("/:id/edit", wrapAsync(async(req, res) => {
     let {id} = req.params;
-    const product = await Product.findById(id);
+    const product = await Product.findById(id).populate("category");
     if(!product){
         req.flash("error", "Product you requested for does not exist!");
         res.redirect("/home");
@@ -178,13 +176,24 @@ router.get("/:id/edit", wrapAsync(async(req, res) => {
 // Router for update
 router.put("/:id", wrapAsync(async (req, res) => {
     let {id} = req.params;
-    let product = await Product.findByIdAndUpdate(id, {...req.body.product});
+    const old = await Product.findById(id);
+    const oldPic = old.image.url;
+    let imageUrl = req.body.product.image && req.body.product.image.url ? req.body.product.image.url : oldPic;
+
+    let product = await Product.findByIdAndUpdate(id, {
+        ...req.body.product,  // Spread the rest of the fields
+        image: {               // Conditionally update the image field
+            url: imageUrl,
+            filename: req.body.product.image ? req.body.product.image.filename : undefined
+        }
+    }, { new: true });  
+    // let product = await Product.findByIdAndUpdate(id, {...req.body.listing});
     if(typeof req.file !== "undefined"){
         let url = req.file.path;
         let filename = req.file.filename;
         product.image = {url, filename};
-        await product.save();
     }
+    await product.save();
     req.flash("success", "Product Updated!");
     res.redirect(`/home/${id}`);
 }));
@@ -192,7 +201,7 @@ router.put("/:id", wrapAsync(async (req, res) => {
 // Router for delete
 router.delete("/:id", wrapAsync(async (req, res) => {
     let {id} = req.params;
-    let deletedProduct = await Product.findByIdAndDelete(id);
+    await Product.findByIdAndDelete(id);
     req.flash("success", "Product Deleted!");
     res.redirect("/home");
 }));

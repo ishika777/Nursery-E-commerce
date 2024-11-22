@@ -1,26 +1,37 @@
 <% layout("layouts/boilerplate") %>
 <div class="container mt-3">
     <h2>Final Order Details</h2>
-    <% if (cart) { %>
-        <div class="row">
-            <% for(item of cart.product){ %>
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <img src="<%= item.image.url %>" class="card-img-top" alt="<%= item.name %>">
-                        <div class="card-body">
-                            <h5 class="card-title"><%= item.name %></h5>
-                            <p class="card-text">Price: $<%= item.price.toFixed(2) %></p>
-                            <p class="card-text">Quantity: <%= cart.quantity[idx] %></p>
-                            <% idx ++; %>
-                        </div>
-                    </div>
-                </div>
-            <% } %>
+    <% if (cart && cart.product.length > 0) { %>
+        <div class="table-responsive">
+            <table class="table table-bordered mt-3">
+                <thead class="table-header">
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% let idx = 0; %>
+                    <% for (let item of cart.product) { %>
+                        <tr>
+                            <td><%= item.name %></td>
+                            <td><%= cart.quantity[idx] %></td>
+                            <td>$<%= item.price.toFixed(2) %></td>
+                            <% idx++; %>
+                        </tr>
+                    <% } %>
+                </tbody>
+                <thead class="table-header">
+                    <tr>
+                        <th colspan="2">Total Amount</th>
+                        <th>$<%= totalAmount.toFixed(2) %></th>
+                    </tr>
+                </thead>
+            </table>
         </div>
-        <div class="total-amount mt-3">
-            <h4>Total Amount: $<%= totalAmount.toFixed(2) %></h4>
-        </div>
-        <form action="/order/payment" method="POST">
+        
+        <form action="/order/payment" method="GET">
             <input type="hidden" name="totalAmount" value="<%= totalAmount.toFixed(2) %>">
             <button type="submit" class="btn edit-btn mt-3">Proceed to Payment</button>
         </form>

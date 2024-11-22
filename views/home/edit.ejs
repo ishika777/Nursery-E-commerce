@@ -2,8 +2,8 @@
 <div class="row mt-3">
     <div class="col-8 offset-2">
         <br></br>
-        <h3>Edit: </h3>
-        <form method="POST" action="/home/<%= product._id %>?_method=PUT" class="needs-validation" novalidate enctype="multipart/form-data">
+        <h3>Edit</h3>
+        <form method="POST" action="/home/<%= product._id %>?_method=PUT" class="needs-validation" novalidate>
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
                 <input name="product[name]" value="<%= product.name %>" type="text" class="form-control" required>
@@ -14,7 +14,7 @@
             </div>
             <div class="mb-3">
                 Original Product Image <br>
-                <img src="<%= originalImageUrl %>">
+                <img style="height: 8rem; width: 8rem; object-fit: cover;" src="<%= originalImageUrl %>">
             </div>
             <div class="mb-3">
                 <label for="image" class="form-label">Upload New Image</label>
@@ -30,6 +30,7 @@
                     <input name="product[quantity]" value="<%= product.quantity %>" type="number" class="form-control" required>
                 </div>
             </div>
+            
             <div class="mb-3">
                 <label for="category" class="form-label">Category</label>
                 <input name="product[category]" value="<%= product.category %>" type="text" class="form-control" required>

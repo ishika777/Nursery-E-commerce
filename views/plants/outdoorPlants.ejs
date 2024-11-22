@@ -1,11 +1,12 @@
 <% layout("layouts/boilerplate") %>
-
-<h3>Outdoor Plants</h3>
+<%- include("../includes/subNav.ejs") %>
 
 <div class="container">
-    <h3>Available Outdoor Plants</h3>
-    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+    <h3 class="category-heading">Outdoor Plants</h3>
+    <% cnt = 0 %>
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3 mb-3">
         <% for (let product of outdoorPlants) { %>
+            <% cnt++ %>
             <a href="/home/<%= product._id %>" class="product-link">
                 <div class="card col product-card">
                     <img src="<%= product.image.url %>" class="card-img-top" alt="<%= product.name %>">
@@ -18,6 +19,11 @@
                     </div>
                 </div>
             </a>
+        <% } %>
+        <% if(cnt == 0){ %>
+            <div>
+                <p>No Outdoor Plants Available!</p>
+            </div>
         <% } %>
     </div>
 </div>

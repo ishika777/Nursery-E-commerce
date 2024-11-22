@@ -15,7 +15,10 @@ const orderSchema = new mongoose.Schema({
         ref: 'ShoppingCart',
     },
     totalamount: Number,
-    shippingaddress: String,
+    orderDate: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
 const Order = mongoose.model('Order', orderSchema);

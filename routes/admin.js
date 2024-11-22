@@ -17,7 +17,6 @@ router.post("/signup", wrapAsync(async(req, res) => {
         let {username, email, password} = req.body;
         const newAdmin = new Admin({email, username});
         const registeredAdmin = await Admin.register(newAdmin, password);
-        console.log("Registered User:", registeredAdmin);
         req.login(registeredAdmin, err => {
             if(err){
                 return next(err);
@@ -38,21 +37,21 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/login", saveRedirectUrl, 
-    passport.authenticate("local", {failureRedirect: "/admin/login", failureFlash: true}), 
-        async(req, res) => {
+    passport.authenticate("admin-local", {failureRedirect: "/admin/login", failureFlash: true}), 
+        wrapAsync(async(req, res) => {
             req.flash("success", "Welcome back to Plant Nursery!!");
             let redirectUrl = res.locals.redirectUrl || "/home";
             res.redirect(redirectUrl);
-});
+}));
 
-router.get("/logout", (req, res, next) => {
+router.get("/logout", wrapAsync(async(req, res, next) => {
     req.logout((error) => {
         if(error){
             return next(error);
         }
         req.flash("success", "Logged out!!");
-        res.redirect("/home");
+        return res.redirect("/home");
     });
-});
+}));
 
 module.exports = router;

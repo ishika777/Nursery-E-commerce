@@ -1,0 +1,44 @@
+<% layout("layouts/boilerplate") %>
+<div class="container mt-3">
+    <h2>Order History</h2>
+    <% if (allOrders.length > 0) { %>
+        <div style="margin-left: 4rem; margin-top: 2rem;">
+            <% for (order of allOrders) { %>
+                <hr>
+                <div class="history-wrapper">
+                    <% let idx = 0 %>
+                    <% for (prod of order.cart.product) { %>
+                        <% for (i of products) { %>
+                            <% if (prod._id.equals(i._id)) { %>
+                                <div class="col-wrapper">
+                                    <div class="history-c1">
+                                        <img src="<%= i.image.url %>" alt="<%= i.name %>" />
+                                    </div>
+                                    <div class="history-c2">
+                                        <h5><%= i.name %></h5>
+                                        <p><%= i.description %></p>
+                                        <div><b>Price : </b>$<%= i.price %></div>
+                                        <div><b>Qty : </b><%= order.cart.quantity[idx] %></div>
+                                        <div><b>Order Date : </b><%= new Date(order.orderDate).toLocaleDateString('en-US', { 
+                                            weekday: 'long', 
+                                            year: 'numeric', 
+                                            month: 'long', 
+                                            day: 'numeric' 
+                                          }) %></div>
+                                    </div>
+                                </div>
+                                <% idx++ %>
+                            <% } %>
+                        <% } %>
+                    <% } %>
+                    <h4>Total Amount : $<%= order.totalamount %></h4>
+                </div>
+            <% } %>
+        </div>
+    <% } else { %>
+        <p>No orders yet!</p>
+    <% } %>
+
+    <a href="/home" style="margin-top: 2rem;" class="btn">Continue Shopping</a>
+
+</div>

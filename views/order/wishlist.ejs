@@ -13,18 +13,20 @@
                         <p class="card-text">
                             Price: $<%= item.productid.price.toFixed(2) %>
                         </p>
-                        <form method="POST" action="/wishlist/remove/<%= item._id %>?_method=DELETE">
-                            <button class="btn edit-btn">Remove from Wishlist</button>
-                        </form>
-                        <form method="POST" action="/cart/<%= item.productid._id %>/add">
-                            <button class="btn btn-dark">Add to Cart</button>
-                        </form>
+                        <div class="wishlist-btns">
+                            <form method="POST" action="/wishlist/remove/<%= item._id %>?_method=DELETE">
+                                <button class="btn">Remove from Wishlist</button>
+                            </form>
+                            <form method="POST" action="/cart/<%= item.productid._id %>/add">
+                                <button class="btn">Add to Cart</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             <% }) %>
         <% } else { %>
             <p>Your wishlist is empty.</p>
         <% } %>
-        <a href="/home" class="btn edit-btn">Continue Shopping</a>
+        <a href="/home" class="btn">Continue Shopping</a>
     </div>
 </div>

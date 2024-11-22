@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const reviewSchema = new mongoose.Schema({
     comment: {
         type: String,
-        required: true,
     },
     rating: {
         type: Number,
@@ -18,7 +17,6 @@ const reviewSchema = new mongoose.Schema({
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true 
     }
 });
 

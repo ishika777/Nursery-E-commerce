@@ -1,26 +1,28 @@
 <% layout("layouts/boilerplate") %>
 <div class="container mt-3">
     <h2>Payment Options</h2>
-    <p>Total Amount: $<%= totalamount.toFixed(2) %></p>
-
-    <form action= "/order/confirmation" method="GET">
-        <div class="form-group">
-            <label>Select Payment Method:</label>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="paymentMethod" id="card" value="card" checked>
-                <label class="form-check-label" for="card">Credit/Debit Card</label>
+    <div class="payment-wrapper">
+        <h5 style="margin-bottom: 2rem; margin-top: 1rem;">Total Amount: $<%= totalamount.toFixed(2) %></h5>
+    
+        <form action= "/order/confirmation" method="POST">
+            <div class="form-group">
+                <label style="margin-bottom: 1rem;"><b>Select Payment Method:</b></label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="paymentMethod" id="card" value="card" checked>
+                    <label class="form-check-label" for="card">Credit/Debit Card</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="paymentMethod" id="upi" value="upi">
+                    <label class="form-check-label" for="upi">UPI</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="paymentMethod" id="paypal" value="paypal">
+                    <label class="form-check-label" for="paypal">PayPal</label>
+                </div>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="paymentMethod" id="upi" value="upi">
-                <label class="form-check-label" for="upi">UPI</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="paymentMethod" id="paypal" value="paypal">
-                <label class="form-check-label" for="paypal">PayPal</label>
-            </div>
-        </div>
-        <button type="submit" class="btn edit-btn mt-3">Confirm Payment</button>
-    </form>
+            <button type="submit" class="btn edit-btn mt-3">Confirm Payment</button>
+        </form>
+    </div>
 </div>
 
 <script>

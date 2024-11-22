@@ -1,3 +1,8 @@
+*{
+    margin: 0;
+    padding: 0;
+    /* text-align: center; */
+}
 .body{
     font-family: sans-serif !important;
     display: flex;
@@ -6,7 +11,14 @@
 }
 
 .container{
-    flex: 1;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.container .category-heading{
+    font-size: 30px;
+    font-weight: 500;
+    margin: 2rem 0;
 }
 
 /* Navbar */
@@ -16,10 +28,15 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-brand {
+.navbar-brand{
     font-weight: bold;
     color: #2d6a4f;
     font-size: 1.5rem;
+}
+
+.navbar-brand i{
+    font-weight: normal;
+    font-size: 2rem;
 }
 
 .nav-link {
@@ -34,13 +51,33 @@
 }
 
 /* Search Bar */
+
+.auth-nav{
+    font-size: 24px;
+    width: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.auth-nav a i{
+    color: #2d6a4f !important;
+}
+
+.auth-nav a i:hover {
+    color: #0f3d29 !important;
+}
+
+
 .search-btn {
-    background-color: #0f3d29;
+    background-color: #227e56;
     color: white;
-    border-radius: 25px;
-    padding: 0 1rem;
+    border-radius: 30px;
+    padding: 0 0.6rem;
     border: none;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    font-size: 12px;
 }
 
 .search-btn:hover {
@@ -50,10 +87,24 @@
 
 .search-inp {
     border-radius: 25px;
-    padding: 0.5rem 2rem;
-    font-size: 1rem;
+    padding: 0.2rem 1rem;
+    font-size: 15px;
     border: 1px solid #ddd;
 }
+
+.user-btn, .admin-btn{
+    background-color: #227e56 !important;
+    border: none !important;
+    color: white !important;
+    padding: 5px 20px;
+    border-radius: 20px;
+    transition: 0.3s all ease-in-out;
+}
+
+.user-btn:hover, .admin-btn:hover{
+    background-color: #1b4332 !important;
+}
+
 
 /* User Dropdown */
 .btn-group .btn-secondary {
@@ -120,7 +171,7 @@
 
 /* Footer */
 .footer {
-    background-color: #ebebeb;
+    /* background-color: #c0c0c012; */
     padding: 20px 0;
     text-align: center;
     color: #222222;
@@ -189,14 +240,19 @@
     color: #1b4332;
 }
 
+
+
+
 /* Cards */
 .product-card{
     border: none !important;
     margin-bottom: 2rem;
+    border-radius: 1rem !important;
 }
 
 .card-img-top{
     border-radius: 1rem !important;
+    height: 20rem;
     width: 100% !important;
     object-fit: cover !important;
 }
@@ -205,8 +261,14 @@
     padding: 0 !important;
 }
 
-.card-text p{
-    font-weight: 400 !important;
+.card-text b{
+    font-size: 20px;
+    font-weight: 700 !important;
+}
+
+.card-text span{
+    font-size: 18px;
+    font-weight: normal !important;
 }
 
 .product-link{
@@ -224,28 +286,118 @@
 }
 
 /* Show page */
-.show-img{
-    height: 30vh;
+.show-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.show-wrapper .c1{
+    flex: 1;
+    width: 50vw;
+    /* max-width: 50vw; */
+}
+
+.show-wrapper .c1 img{
+    margin-left: 4rem;
+    vertical-align: middle;
+    width: 35vw;
+    object-fit: cover;
+    height: 70vh;
+    border-radius: 10px;
+}
+.show-wrapper .c2{
+    margin-top: 20px;
+    flex: 1;
+    align-self: flex-start;
+    margin-right: 4rem;
+}
+
+.show-wrapper .c2 .show-head h3{
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.show-wrapper .card-text .card-desc{
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+.show-wrapper .card-text .card-price{
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin: 0;
+}
+.show-wrapper .card-text span{
+    font-size: 12px;
+    font-weight: 500;
 }
 
 .btns{
+    margin-top: 3rem;
     display: flex;
+    gap: 25px;
 }
 
-.show-card{
-    padding-left: 0;
-    padding-right: 0;
-}
 
-.edit-btn{
+.btn{
     background-color: #227e56 !important;
     border: none !important;
     color: white !important;
+    padding: 8px 25px;
+    border-radius: 20px;
+    transition: 0.3s all ease-in-out;
 }
 
-.edit-btn:hover{
-    border: 1px solid black !important;
+.btn:hover{
+    background-color: #1b4332 !important;
 }
+
+.review-container{
+    margin: 2rem 4rem;
+}
+
+.review-container .review-heading{
+    font-size: 35px;
+    font-weight: 600;
+    margin-top: 2rem;
+}
+
+.review-container .review-form{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 8rem;
+    margin-top: 3rem;
+}
+.review-container .review-form .review-rating label{
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+.review-container .review-form .review-comment label{ 
+    font-size: 15px;
+}
+
+.review-btn{
+    margin-top: 2rem;
+    padding: 5px 30px;
+    margin-bottom: 1rem;
+}
+
+.review-list-container{
+    margin: 0 2rem;
+}
+
+.review-list-heading{
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+
+
+
 
 /* Chatbot page */
 #chat-container {
@@ -263,3 +415,84 @@
 #send-button{
     color: white;
 }
+
+
+
+
+
+
+/* .payment-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #f8f9fa; 
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: sans-serif;
+    color: #333;
+}
+
+.payment-container h2 {
+    font-size: 1.75rem;
+    color: #2d6a4f;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.payment-container p {
+    font-size: 1.25rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-check-label {
+    font-size: 1.1rem;
+    color: #2d6a4f;
+    margin-left: 0.5rem;
+}
+
+.form-check-input {
+    accent-color: #2d6a4f; 
+}
+
+.confirm-payment-btn {
+    background-color: #227e56;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.confirm-payment-btn:hover {
+    background-color: #0f3d29;
+    transform: scale(1.05); 
+}
+
+.confirm-payment-btn:focus,
+.confirm-payment-btn:active {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(34, 126, 86, 0.25);
+}
+.table-header {
+    background-color: #2d6a4f;
+    color: white;
+}
+
+.table-bordered th, .table-bordered td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.total-amount {
+    font-weight: bold;
+    color: #2d6a4f;
+    font-size: 1.25rem;
+}  */
+

@@ -6,84 +6,62 @@
                 <a class="nav-link" href="/home">Home</a>
                 <a class="nav-link" href="/about">About Us</a> 
                 <a class="nav-link" href="/contact">Contact Us</a>
-                <a class="nav-link" href="/chatbot">AI Chatbot</a>
             </div>
             <div class="navbar-nav ms-auto">
                 <form class="d-flex" role="search" action="/home/search" method="GET">
                     <input class="form-control me-2 search-inp" type="search" name="query" placeholder="Search plants" aria-label="Search">
-                    <button class="btn btn-outline-success search-btn" type="submit" aria-label="Search">
+                    <button class="btn-outline-success search-btn" type="submit" aria-label="Search">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </form>
             </div>            
             <div class="navbar-nav ms-auto">
-                <div class="btn-group dropstart">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        User
-                    </button>
-                    <ul class="dropdown-menu">
-                        <% if(!currentUser){ %>
-                            <li><a class="dropdown-item" href="/user/signup">Signup</a></li>
-                            <li><a class="dropdown-item" href="/user/login">Login</a></li>
-                        <% } %>
-                        <% if(currentUser){ %>
-                            <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
-                        <% } %>
-                    </ul>
+
+
+                <div class="auth-nav">
+                    
+                    <% if(currentAdmin){ %>
+                        <div class="plant-type">
+                            <a href="/home/new"><i class="fa-solid fa-seedling"></i>New Plant</a>
+                        </div>
+                    <% } %>
+
+                    <% if(currentUser){ %>
+                        <div class="wishlist">
+                            <a href="/wishlist"><i class="fa-solid fa-heart"></i></a>
+                        </div>
+                        <div class="cart">
+                            <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
+                        </div>
+                    <% } %>
                 </div>
-                <div class="btn-group dropstart ms-3">
-                    <button type="button" class="btn btn-secondary dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
-                        Admin
+
+
+               
+                <div class="dropstart">
+                    <button type="button" class="user-btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-user"></i>
                     </button>
                     <ul class="dropdown-menu">
-                        <% if(!currentAdmin){ %>
-                            <li><a class="dropdown-item" href="/admin/signup">Signup</a></li>
-                            <li><a class="dropdown-item" href="/admin/login">Login</a></li>
+
+                        <% if(!currentUser && !currentAdmin){ %>
+                            <li><a class="dropdown-item" href="/user/login">User</a></li>
+                            <li><a class="dropdown-item" href="/admin/login">Admin</a></li>
                         <% } %>
-                        <% if(currentAdmin){ %>
+
+                        <% if(currentUser){ %>
+                            <li><a class="dropdown-item"  href="/user/showProfile">View Profile</a></li>
+                            <li><a class="dropdown-item"  href="/user/orderHistory">View Order History</a></li>
                             <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
                         <% } %>
+
+                        <% if (currentAdmin) { %>
+                            <li><a class="dropdown-item" href="/admin/logout">Logout</a></li>
+                        <% } %>
+
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 </nav>
-<div class="container-fluid">
-    <div id="plant-select">
-        <div class="plant-type">
-            <a href="/home/indoorPlants"><p>Indoor Plants</p></a>
-        </div>
-        <div class="plant-type">
-            <a href="/home/outdoorPlants"><p>Outdoor Plants</p></a>
-        </div>
-        <div class="plant-type">
-            <a href="/home/succulents"><p>Succulents</p></a>
-        </div>
-        <div class="plant-type">
-            <a href="/home/herbs"><p>Herbs</p></a>
-        </div>
-        <div class="plant-type">
-            <a href="/home/flowers"><p>Flowers</p></a>
-        </div>
-        <% if(currentAdmin){ %>
-            <div class="plant-type ms-auto">
-                <i class="fa-solid fa-seedling"></i>
-                <a href="/home/new">New Plant</a>
-            </div>
-        <% } %>
-        <% if(currentUser){ %>
-            <div class="plant-type wishlist ms-auto">
-                <a href="/wishlist"><i class="fa-solid fa-heart"></i>Wishlist</a>
-            </div>
-            <div class="plant-type cart ms-auto">
-                <a href="/cart"><i class="fa-solid fa-cart-shopping"></i>Your Cart</a>
-            </div>
-            <div class="plant-type ms-auto">
-                <i class="fa-solid fa-user"></i>
-                <a href="/user/showProfile">Show Profile</a>
-            </div>
-        <% } %>
-    </div>
-</div>
-<hr>

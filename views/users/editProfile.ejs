@@ -2,34 +2,35 @@
 <div class="row mt-3">
     <div class="col-8 offset-2">
         <br></br>
-        <h3>Create your profile: </h3>
+        <h3>Edit your profile: </h3>
         <form method="POST" action="/user/profile" class="needs-validation" novalidate>
+            <% console.log(profile[0].name) %>
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input name="userProfile[name]" placeholder="Full Name" type="text" class="form-control" required>
+                <input name="userProfile[name]" type="text" class="form-control" value="<% profile[0].name %>" required>
                 <div class="valid-feedback">Nice name!!</div>
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Address</label>
-                <textarea name="userProfile[address]" class="form-control" required></textarea>
+                <textarea name="userProfile[address]" class="form-control" required><% profile[0].address %></textarea>
             </div>
             <div class="row">
                 <div class="mb-3 col-md-4">
                     <label for="city" class="form-label">City</label>
-                    <input name="userProfile[city]" placeholder="New Delhi" class="form-control" required>
+                    <input name="userProfile[city]" value="<% profile[0].city %>" class="form-control" required>
                 </div>
                 <div class="mb-3 col-md-8">
                     <label for="state" class="form-label">State</label>
-                    <input name="userProfile[state]" placeholder="Delhi" type="text" class="form-control" required>
+                    <input name="userProfile[state]" value="<% profile[0].state %>" type="text" class="form-control" required>
                 </div>
             </div>
             <div class="mb-3">
                 <label for="postalCode" class="form-label">Postal Code</label>
-                <input name="userProfile[postalcode]" placeholder="110002" type="number" class="form-control" required>
+                <input name="userProfile[postalcode]" value="<% profile[0].postalcode %>" type="number" class="form-control" required>
             </div>
             <div class="mb-3">
                 <label for="phonenumber" class="form-label">Phone Number</label>
-                <input name="userProfile[phonenumber]" placeholder="99xxxxxxxx" type="number" class="form-control" required>
+                <input name="userProfile[phonenumber]" value="<% profile[0].number %>" type="number" class="form-control" required>
             </div>
             <button class="btn">Submit</button>
             <br><br>

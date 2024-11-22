@@ -45,6 +45,11 @@ const paymentSchema = new mongoose.Schema({
         ref: 'Order',
         required: true,
     },
+    userid : {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    },
     paymentmethod: String,
     paymentstatus: String,
     paymentdate: {
@@ -53,19 +58,8 @@ const paymentSchema = new mongoose.Schema({
     },
 });
 
-const chatbotInteractionSchema = new mongoose.Schema({
-    userid: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true,
-    },
-    query: String,
-    response: String,
-});
-
 const ShoppingCart = mongoose.model('ShoppingCart', shoppingCartSchema);
 const Wishlist = mongoose.model('Wishlist', wishlistSchema);
 const Payment = mongoose.model('Payment', paymentSchema);
-const ChatbotInteraction = mongoose.model('ChatbotInteraction', chatbotInteractionSchema);
 
-module.exports = {ShoppingCart, Wishlist, Payment, ChatbotInteraction};
+module.exports = {ShoppingCart, Wishlist, Payment};
